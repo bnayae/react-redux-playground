@@ -14,3 +14,24 @@ export const fetchPosts = () => async dispatch => {
     console.log(err);
   }
 };
+
+export const createPost = postData => async dispatch => {
+  try {
+    console.log("Create Post");
+    let response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      // mode: "no-cors",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(postData)
+    });
+    let post = await response.json();
+    dispatch({
+      type: NEW_POST,
+      payload: post
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
